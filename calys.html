@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Learning TKJ | Black Gold</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gold: #d4af37;
+    --gold-light: #f5d76e;
+    --black: #090909;
+    --panel: #151515;
+    --text: #f5f5f5;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--black);
+    color: var(--text);
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #111;
+    border-right: 1px solid #9c7b22;
+    padding: 25px 15px;
+    transition: 0.3s;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.logo {
+    text-align: center;
+    color: var(--gold);
+    font-size: 23px;
+    font-weight: bold;
+    padding: 15px 0 30px;
+    border-bottom: 1px solid #443715;
+}
+
+.logo small {
+    display: block;
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 8px;
+    letter-spacing: 3px;
+}
+
+.menu-title {
+    color: #888;
+    font-size: 11px;
+    margin: 25px 12px 12px;
+    letter-spacing: 2px;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 8px;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    text-decoration: none;
+    color: #ddd;
+    padding: 14px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: 0.25s;
+    font-size: 14px;
+}
+
+.menu a:hover {
+    background: #302817;
+    color: var(--gold-light);
+}
+
+.menu a.active {
+    background: var(--gold);
+    color: #111;
+    font-weight: bold;
+    box-shadow: 0 3px 15px #d4af3740;
+}
+
+.menu-icon {
+    font-size: 19px;
+    width: 25px;
+    text-align: center;
+}
+
+/* MAIN */
+.main {
+    margin-left: 260px;
+    padding: 25px;
+    transition: 0.3s;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 12px;
+}
+
+.toggle {
+    background: var(--gold);
+    border: none;
+    color: #111;
+    padding: 10px 15px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.topbar h2 {
+    color: var(--gold);
+    font-size: 21px;
+}
+
+.profile {
+    color: #ccc;
+    font-size: 13px;
+}
+
+/* CONTENT */
+.page {
+    display: none;
+    animation: fade 0.3s ease;
+}
+
+.page.show {
+    display: block;
+}
+
+@keyframes fade {
+    from {opacity: 0; transform: translateY(8px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.welcome {
+    padding: 35px;
+    background: linear-gradient(120deg, #252014, #111);
+    border: 1px solid #8d7025;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.welcome h1 {
+    color: var(--gold);
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.welcome p {
+    color: #ccc;
+    line-height: 1.7;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.card {
+    background: var(--panel);
+    padding: 23px;
+    border: 1px solid #41351a;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+.card .icon {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #aaa;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.section-title {
+    color: var(--gold);
+    margin: 25px 0 15px;
+    font-size: 22px;
+}
+
+.material-card {
+    background: #151515;
+    padding: 22px;
+    border: 1px solid #57451b;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.material-card:hover {
+    border-color: var(--gold);
+    background: #211d13;
+}
+
+.material-card h3 {
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.material-card p {
+    color: #bbb;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.btn {
+    background: var(--gold);
+    color: #111;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.btn:hover {
+    background: var(--gold-light);
+}
+
+.lesson {
+    background: #151515;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #745d20;
+    line-height: 1.8;
+    margin-top: 15px;
+}
+
+.lesson h3 {
+    color: var(--gold);
+    margin: 18px 0 8px;
+}
+
+.lesson p, .lesson li {
+    color: #ccc;
+    margin-bottom: 8px;
+}
+
+.lesson ul {
+    padding-left: 22px;
+}
+
+.code {
+    background: #080808;
+    border-left: 3px solid var(--gold);
+    padding: 15px;
+    color: #f5d76e;
+    overflow-x: auto;
+    margin: 12px 0;
+    white-space: pre-wrap;
+}
+
+.back {
+    background: #292929;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: #222;
+    border: 1px solid #806523;
+    color: white;
+    border-radius: 7px;
+}
+
+.footer {
+    text-align: center;
+    color: #777;
+    margin-top: 45px;
+    font-size: 12px;
+}
+
+/* SIDEBAR COLLAPSE */
+.sidebar.closed {
+    transform: translateX(-100%);
+}
+
+.main.expanded {
+    margin-left: 0;
+}
+
+@media(max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 17px;
+    }
+
+    .topbar h2 {
+        font-size: 16px;
+    }
+
+    .welcome {
+        padding: 23px;
+    }
+
+    .welcome h1 {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        TKJ GOLD
+        <small>E-LEARNING SYSTEM</small>
+    </div>
+
+    <p class="menu-title">MENU UTAMA</p>
+
+    <ul class="menu">
+        <li><a class="active" onclick="showPage('dashboard',this)">
+            <span class="menu-icon">⌂</span> Dashboard
+        </a></li>
+
+        <li><a onclick="showPage('materi',this)">
+            <span class="menu-icon">📚</span> Materi TKJ
+        </a></li>
+
+        <li><a onclick="showPage('praktikum',this)">
+            <span class="menu-icon">🖥️</span> Praktikum
+        </a></li>
+
+        <li><a onclick="showPage('lab',this)">
+            <span class="menu-icon">🌐</span> Laboratorium Jaringan
+        </a></li>
+
+        <li><a onclick="showPage('tugas',this)">
+            <span class="menu-icon">📝</span> Tugas Siswa
+        </a></li>
+
+        <li><a onclick="showPage('evaluasi',this)">
+            <span class="menu-icon">📊</span> Evaluasi
+        </a></li>
+    </ul>
+
+    <p class="menu-title">INFORMASI</p>
+
+    <ul class="menu">
+        <li><a onclick="showPage('tentang',this)">
+            <span class="menu-icon">ℹ️</span> Tentang TKJ
+        </a></li>
+    </ul>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main" id="main">
+
+    <div class="topbar">
+        <button class="toggle" onclick="toggleSidebar()">☰</button>
+        <h2>WEBSITE CARISA ARYANI DAN SITI ALAWIYAH</h2>
+        <div class="profile">👤 Siswa TKJ</div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <section class="page show" id="dashboard">
+
+        <div class="welcome">
+            <h1>Selamat Datang!</h1>
+            <p>
+                Selamat datang di E-Learning SMKN 1 RENGASDENGKLOK, Teknik Komputer
+                dan Jaringan. Pelajari materi, praktikkan ilmu,
+                dan tingkatkan kemampuan teknologi jaringan Anda.
+            </p>
+            <button class="btn" onclick="showPage('materi')">
+                Mulai Belajar →
+            </button>
+        </div>
+
+        <h2 class="section-title">Dashboard Pembelajaran</h2>
+
+        <div class="cards">
+            <div class="card">
+                <div class="icon">📚</div>
+                <h3>Materi TKJ</h3>
+                <p>Pelajari materi MikroTik, jaringan dan server.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🖥️</div>
+                <h3>Praktikum</h3>
+                <p>Latihan konfigurasi perangkat jaringan.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🌐</div>
+                <h3>Laboratorium</h3>
+                <p>Kenali perangkat dan simulasi jaringan.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📝</div>
+                <h3>Tugas Siswa</h3>
+                <p>Kerjakan tugas pembelajaran TKJ.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MATERI -->
+    <section class="page" id="materi">
+
+        <h2 class="section-title">📚 Materi Pembelajaran TKJ</h2>
+        <p style="color:#aaa;margin-bottom:20px">
+            Pilih materi di bawah untuk membuka pembahasan.
+        </p>
+
+        <div class="material-card" onclick="openLesson('mikrotik')">
+            <h3>01. Materi MikroTik</h3>
+            <p>DHCP Server, NAT, Firewall, dan Hotspot.</p>
+            <button class="btn">Buka Materi →</button>
+        </div>
+
+        <div class="material-card" onclick="openLesson('jaringan')">
+            <h3>02. Teknologi Jaringan</h3>
+            <p>IP Address, Subnetting, Router, Switch, dan VLAN.</p>
+            <button class="btn">Buka Materi →</button>
+        </div>
+
+        <div class="material-card" onclick="openLesson('server')">
+            <h3>03. Administrasi Server</h3>
+            <p>Debian Server, DNS, DHCP, FTP, dan Web Server.</p>
+            <button class="btn">Buka Materi →</button>
+        </div>
+    </section>
+
+    <!-- DETAIL MATERI -->
+    <section class="page" id="detail">
+        <button class="back" onclick="showPage('materi')">
+            ← Kembali ke Materi
+        </button>
+        <div id="lessonContent"></div>
+    </section>
+
+    <!-- PRAKTIKUM -->
+    <section class="page" id="praktikum">
+        <h2 class="section-title">🖥️ Praktikum TKJ</h2>
+
+        <div class="material-card">
+            <h3>Praktikum MikroTik</h3>
+            <p>Belajar konfigurasi dasar DHCP, NAT dan Hotspot.</p>
+        </div>
+
+        <div class="material-card">
+            <h3>Praktikum Jaringan</h3>
+            <p>Membuat jaringan LAN menggunakan Packet Tracer.</p>
+        </div>
+
+        <div class="material-card">
+            <h3>Praktikum Debian</h3>
+            <p>Mengenal konfigurasi server berbasis Linux Debian.</p>
+        </div>
+    </section>
+
+    <!-- LAB -->
+    <section class="page" id="lab">
+        <h2 class="section-title">🌐 Laboratorium Jaringan</h2>
+
+        <div class="cards">
+            <div class="card">
+                <div class="icon">🔌</div>
+                <h3>Router</h3>
+                <p>Perangkat untuk menghubungkan jaringan berbeda.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔀</div>
+                <h3>Switch</h3>
+                <p>Menghubungkan beberapa perangkat dalam LAN.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📡</div>
+                <h3>Access Point</h3>
+                <p>Menyediakan koneksi jaringan nirkabel.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🧵</div>
+                <h3>Kabel UTP</h3>
+                <p>Media transmisi data pada jaringan LAN.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TUGAS -->
+    <section class="page" id="tugas">
+        <h2 class="section-title">📝 Tugas Siswa</h2>
+
+        <div class="material-card">
+            <h3>Tugas 1 - MikroTik</h3>
+            <p>Jelaskan pengertian DHCP Server dan fungsinya!</p>
+        </div>
+
+        <div class="material-card">
+            <h3>Tugas 2 - Jaringan</h3>
+            <p>Apa perbedaan Router dan Switch?</p>
+        </div>
+
+        <div class="material-card">
+            <h3>Tugas 3 - Server</h3>
+            <p>Jelaskan fungsi DNS Server!</p>
+        </div>
+
+        <h3 class="section-title">Kirim Jawaban</h3>
+        <input type="text" id="nama" placeholder="Nama siswa">
+        <textarea id="jawaban" rows="5" placeholder="Tuliskan jawaban tugas..."></textarea>
+        <button class="btn" onclick="kirimTugas()">Kirim Jawaban</button>
+    </section>
+
+    <!-- EVALUASI -->
+    <section class="page" id="evaluasi">
+        <h2 class="section-title">📊 Evaluasi Pembelajaran</h2>
+
+        <div class="material-card">
+            <h3>Soal 1</h3>
+            <p>Apa fungsi DHCP Server?</p>
+
+            <label><input type="radio" name="q1" value="a"> Mengatur alamat IP otomatis</label><br>
+            <label><input type="radio" name="q1" value="b"> Menghapus file</label><br>
+            <label><input type="radio" name="q1" value="c"> Mematikan komputer</label>
+        </div>
+
+        <div class="material-card">
+            <h3>Soal 2</h3>
+            <p>Perangkat untuk menghubungkan jaringan berbeda adalah?</p>
+
+            <label><input type="radio" name="q2" value="a"> Keyboard</label><br>
+            <label><input type="radio" name="q2" value="b"> Router</label><br>
+            <label><input type="radio" name="q2" value="c"> Monitor</label>
+        </div>
+
+        <div class="material-card">
+            <h3>Soal 3</h3>
+            <p>Apa fungsi DNS Server?</p>
+
+            <label><input type="radio" name="q3" value="a"> Mengatur layar</label><br>
+            <label><input type="radio" name="q3" value="b"> Mengelola keyboard</label><br>
+            <label><input type="radio" name="q3" value="c"> Menerjemahkan nama domain menjadi alamat IP</label>
+        </div>
+
+        <button class="btn" onclick="cekNilai()">Periksa Jawaban</button>
+        <h3 id="hasil" style="color:#d4af37;margin-top:20px"></h3>
+    </section>
+
+    <!-- TENTANG -->
+    <section class="page" id="tentang">
+        <h2 class="section-title">Tentang TKJ</h2>
+        <div class="lesson">
+            <h3>Teknik Komputer dan Jaringan</h3>
+            <p>
+                TKJ merupakan bidang keahlian yang mempelajari
+                komputer, jaringan, server, sistem operasi,
+                administrasi jaringan, dan teknologi informasi.
+            </p>
+            <h3>Tujuan Pembelajaran</h3>
+            <ul>
+                <li>Memahami perangkat komputer.</li>
+                <li>Mampu membangun jaringan komputer.</li>
+                <li>Mampu mengelola server.</li>
+                <li>Mampu melakukan troubleshooting.</li>
+                <li>Memahami keamanan jaringan.</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="footer">
+        © 2026 E-Learning TKJ | Black Gold Edition
+    </div>
+
+</main>
+
+<script>
+
+// SIDEBAR
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const main = document.getElementById("main");
+
+    if (window.innerWidth <= 768) {
+        sidebar.classList.toggle("mobile-open");
+    } else {
+        sidebar.classList.toggle("closed");
+        main.classList.toggle("expanded");
+    }
+}
+
+// PINDAH HALAMAN
+function showPage(page, element) {
+    document.querySelectorAll(".page").forEach(p => {
+        p.classList.remove("show");
+    });
+
+    document.getElementById(page).classList.add("show");
+
+    document.querySelectorAll(".menu a").forEach(a => {
+        a.classList.remove("active");
+    });
+
+    if (element) element.classList.add("active");
+
+    if (window.innerWidth <= 768) {
+        document.getElementById("sidebar").classList.remove("mobile-open");
+    }
+
+    window.scrollTo(0, 0);
+}
+
+// DETAIL MATERI
+const lessons = {
+
+mikrotik: `
+<div class="lesson">
+<h2 style="color:#d4af37">Materi MikroTik</h2>
+
+<p>MikroTik adalah sistem operasi dan perangkat jaringan yang digunakan untuk mengelola koneksi internet dan jaringan komputer.</p>
+
+<h3>1. DHCP Server</h3>
+<p>DHCP Server berfungsi memberikan alamat IP secara otomatis kepada perangkat yang terhubung ke jaringan.</p>
+<p>Contoh: komputer mendapatkan IP tanpa harus mengatur IP secara manual.</p>
+
+<h3>2. NAT (Network Address Translation)</h3>
+<p>NAT berfungsi menerjemahkan alamat IP private menjadi alamat IP public agar perangkat dalam jaringan dapat mengakses internet.</p>
+
+<h3>3. Firewall</h3>
+<p>Firewall digunakan untuk mengatur lalu lintas jaringan dan membantu melindungi jaringan dari akses yang tidak diizinkan.</p>
+
+<h3>4. Hotspot</h3>
+<p>Hotspot MikroTik memungkinkan pengguna mengakses internet melalui halaman login menggunakan username dan password.</p>
+
+<h3>Kesimpulan</h3>
+<p>DHCP mengatur IP otomatis, NAT mengatur translasi alamat IP, Firewall mengatur keamanan lalu lintas, dan Hotspot mengatur akses pengguna.</p>
+</div>`,
+
+jaringan: `
+<div class="lesson">
+<h2 style="color:#d4af37">Teknologi Jaringan</h2>
+
+<h3>1. IP Address</h3>
+<p>IP Address adalah alamat identitas perangkat dalam jaringan komputer.</p>
+<p>Contoh IPv4: 192.168.1.10</p>
+
+<h3>2. Subnetting</h3>
+<p>Subnetting adalah proses membagi satu jaringan menjadi beberapa jaringan yang lebih kecil.</p>
+<p>Contoh: 192.168.1.0/24 memiliki subnet mask 255.255.255.0.</p>
+
+<h3>3. Router</h3>
+<p>Router menghubungkan dua atau lebih jaringan yang berbeda dan meneruskan paket data.</p>
+
+<h3>4. Switch</h3>
+<p>Switch menghubungkan berbagai perangkat dalam satu jaringan lokal (LAN).</p>
+
+<h3>5. VLAN</h3>
+<p>Virtual LAN adalah teknologi untuk membagi jaringan secara logis menjadi beberapa kelompok meskipun menggunakan perangkat switch yang sama.</p>
+
+<h3>Kesimpulan</h3>
+<p>IP Address menjadi identitas perangkat, Subnetting membagi jaringan, Router menghubungkan jaringan, Switch menghubungkan perangkat, dan VLAN memisahkan jaringan secara logis.</p>
+</div>`,
+
+server: `
+<div class="lesson">
+<h2 style="color:#d4af37">Administrasi Server</h2>
+
+<h3>1. Debian Server</h3>
+<p>Debian adalah sistem operasi Linux yang banyak digunakan untuk membangun dan mengelola server.</p>
+
+<h3>2. DNS Server</h3>
+<p>DNS (Domain Name System) menerjemahkan nama domain menjadi alamat IP.</p>
+<p>Contoh: domain website diterjemahkan menjadi alamat IP server.</p>
+
+<h3>3. DHCP Server</h3>
+<p>DHCP Server memberikan konfigurasi IP secara otomatis kepada client.</p>
+
+<h3>4. FTP Server</h3>
+<p>FTP Server digunakan untuk transfer file antara client dan server melalui jaringan.</p>
+
+<h3>5. Web Server</h3>
+<p>Web Server bertugas menerima permintaan dari browser dan mengirimkan halaman website kepada pengguna.</p>
+
+<h3>Kesimpulan</h3>
+<p>Administrasi server mempelajari cara membangun, mengatur, mengelola, dan memelihara layanan server.</p>
+</div>`
+};
+
+function openLesson(type) {
+    document.getElementById("lessonContent").innerHTML = lessons[type];
+    showPage("detail");
+}
+
+// KIRIM TUGAS
+function kirimTugas() {
+    const nama = document.getElementById("nama").value;
+    const jawaban = document.getElementById("jawaban").value;
+
+    if (!nama || !jawaban) {
+        alert("Isi nama dan jawaban terlebih dahulu!");
+        return;
+    }
+
+    alert("Jawaban berhasil disiapkan. Hubungkan website ke server untuk menyimpan tugas.");
+}
+
+// EVALUASI
+function cekNilai() {
+    const jawaban = {
+        q1: "a",
+        q2: "b",
+        q3: "c"
+    };
+
+    let nilai = 0;
+
+    for (let soal in jawaban) {
+        const pilih = document.querySelector(
+            'input[name="' + soal + '"]:checked'
+        );
+
+        if (pilih && pilih.value === jawaban[soal]) {
+            nilai++;
+        }
+    }
+
+    document.getElementById("hasil").innerHTML =
+        "Nilai kamu: " + (nilai / 3 * 100).toFixed(0) +
+        " / 100 (" + nilai + " dari 3 benar)";
+}
+
+</script>
+
+</body>
+</html>
